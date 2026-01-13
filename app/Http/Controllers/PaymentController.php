@@ -2,57 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Payment;
 use Illuminate\Http\Request;
+use App\Models\Payment;
+use App\Models\Customer;
 
 class PaymentController extends Controller
 {
-    // List all payments
+    // Get all payments (optional)
     public function index()
     {
-        return Payment::all();
+        return response()->json(Payment::with('customer')->get());
     }
 
-    // Create a new payment
+    // Store new payment
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'amount' => 'required|numeric|min:0.01',
+            'customer_id' => 'required|exists:customers,id',
+            'amount' => 'required|numeric|min:0',
+            'payment_method' => 'nullable|string|max:50',
         ]);
 
         $payment = Payment::create([
-            'user_id' => $request->user_id,
+            'customer_id' => $request->customer_id,
             'amount' => $request->amount,
-            'status' => 'pending',
+            'payment_method' => $request->payment_method,
         ]);
 
         return response()->json($payment, 201);
     }
 
-    // Show a specific payment
-    public function show(Payment $payment)
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'amount' => 'required|numeric|min:0',
+        'payment_method' => 'nullable|string|max:50',
+    ]);
+
+    $payment = Payment::findOrFail($id);
+    $payment->update([
+        'amount' => $request->amount,
+        'payment_method' => $request->payment_method,
+    ]);
+
+    return response()->json($payment, 200);
+}
+
+    // Delete payment   
+    public function destroy($id)
     {
-        return $payment;
-    }
-
-    // Update payment status
-    public function update(Request $request, Payment $payment)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,success,failed',
-            'transaction_id' => 'nullable|string',
-        ]);
-
-        $payment->update($request->only('status', 'transaction_id'));
-
-        return $payment;
-    }
-
-    // Delete a payment
-    public function destroy(Payment $payment)
-    {
+        $payment = Payment::findOrFail($id);
         $payment->delete();
-        return response()->json(null, 204);
+
+        return response()->json(['message' => 'Payment deleted'], 200);
     }
 }

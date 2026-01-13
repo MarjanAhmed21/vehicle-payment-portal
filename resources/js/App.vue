@@ -1,17 +1,16 @@
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold">
-      Vehicle Payment Portal
-    </h1>
+  <div class="min-h-screen bg-gray-100 p-4">
+    <nav class="mb-4">
+    <router-link to="/" class="mr-4 text-blue-600 hover:underline">Add Customer</router-link>
+    <router-link to="/payment" class="mr-4 text-blue-600 hover:underline">Add Payment</router-link>
+    <router-link to="/payments" class="text-blue-600 hover:underline">View Payments</router-link>
+  </nav>
 
-    <p class="mt-2 text-gray-600">
-      Vue.js is now working inside Laravel!! Yahoo!
-    </p>
+
+    <router-view />
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App',
-};
+export default {};
 </script>
