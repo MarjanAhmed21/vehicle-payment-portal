@@ -1,13 +1,4 @@
-Vehicle Payment Portal 🚗💳
-
-
-
-
-
-
-
-
-
+Vehicle Payment Portal
 
 A Laravel + Vue.js payment portal demonstrating REST API development, frontend integration, and basic CRUD operations for customers and payments.
 
@@ -34,9 +25,9 @@ REST API for customers and payments
 
 Eloquent models: Customer, Payment
 
-Database migrations for customers, payments, and sessions
+Database migrations for customers, payments, sessions
 
-Input validation and error handling
+Validation for form inputs
 
 CRUD operations: create, read, update, delete payments
 
@@ -54,49 +45,42 @@ Vue Router navigation between pages
 
 Success and error messages for all actions
 
-Setup Instructions
-1. Clone the repository
+Setup
+
+Clone the repo:
+
 git clone https://github.com/MarjanAhmed21/vehicle-payment-portal.git
 cd vehicle-payment-portal
 
-2. Install PHP dependencies
+
+Install PHP dependencies:
+
 composer install
 
-3. Install Node dependencies
+
+Install Node dependencies:
+
 npm install
 
-4. Generate Laravel app key
+
+Generate Laravel app key:
+
 php artisan key:generate
 
-5. Run database migrations
+
+Run database migrations:
+
 php artisan migrate
 
-6. Compile frontend assets
+
+Compile frontend assets:
+
 npm run dev
 
-7. Serve the application
+
+Serve the application:
+
 php artisan serve
 
-8. Open in browser
-http://127.0.0.1:8000
 
-Usage
-
-Navigate using the top links:
-
-Page	Description
-Add Customer	Create new customers
-Add Payment	Record payments for existing customers
-View Payments	View all payments, edit or delete inline
-
-Customer IDs are auto-generated.
-
-Future Enhancements
-
-Show total payments per customer
-
-Add filtering/searching for payments
-
-User authentication for secure access
-
-Export payments as CSV or PDF
+Open in browser: http://127.0.0.1:8000
